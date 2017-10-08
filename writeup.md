@@ -52,7 +52,7 @@ using the `cv2.undistort()` function and obtained this result:
 
 ![alt text][image01]
 
-The distortion correction transform stretches the image. For example,  the rear left light of the white car disappears after this transformation. Additional examples of undistorted images are located in output_images/undistorted_images folder.
+The distortion correction transform stretches the image. Additional examples of undistorted images are located in output_images/calibrated_images and output_images/undistorted_images folders.
 
 ### Pipeline (single images)
 
@@ -162,7 +162,7 @@ Here is a [link to my video result](./output_videos/project_video.mp4).
 In this project I showed how to detect lane lines, identify lane area, compute radius of curvature and position of a car within a lane. There are several points for future improvements and enhancements:  
 1. Make the pipeline work well on two other videos (`challenge_video.mp4` and `harder_challenge_video.mp4`).
 2. The test video and images have a car driving in the leftmost or rightmost lane. The pipeline should also be tested when the car drives in a central lane.
-3. The test video and images  have a car driving in flat road. The pipeline should also be tested when the car drives in the road with significant slopes. 
+3. The test video and images  have a car driving in flat road. The pipeline should also be tested when the car drives in the road with significant slopes.
 4. The pipeline can be enhanced to handle roads with only a single lane line.
 6. Handling of splitting and merging lanes.
 7. Handling of roads that have pedestrian crossing markings.
