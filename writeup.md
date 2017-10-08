@@ -51,9 +51,11 @@ using the `cv2.undistort()` function and obtained this result:
 
 ![alt text][image1]
 
-The distortion correction transform stretches the image. For example,  the rear left light of the white car disappears after this transformation. Additional examples of undistorted images are located in output_images/undistorted_images folder. 
+The distortion correction transform stretches the image. For example,  the rear left light of the white car disappears after this transformation. Additional examples of undistorted images are located in output_images/undistorted_images folder.
 
 ### Pipeline (single images)
+
+The pipeline for test images is managed by the code in cell 13 of `Advanced Lane Lines.ipynb` notebook.
 
 #### 1. Provide an example of a distortion-corrected image.
 
@@ -107,7 +109,7 @@ The following image shows the rectangles as they move through search windows, pi
 
 ![alt text][image5]
 
-Additional examples of such images are located in the folder output_images/fit_lane folder. 
+Additional examples of such images are located in the folder output_images/fit_lane folder.
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -143,12 +145,15 @@ Additional examples of such images are located in the folder output_images/final
 
 ### Pipeline (video)
 
-Here's a [link to my video result](./output_videos/project_video.mp4). I used two additional techniques to speed up the computation and improve the accuracy of finding the drivable area:
+The pipeline for processing video frames is managed by function `process_image_continuous()` in cell 15 of `Advanced Lane Lines.ipynb` notebook.
+In addition to the steps used to process a single image, I used two techniques to speed up the computation and improve the accuracy of finding the drivable area:
 
 1. **Adjustment of lane lines from the previous frame**. After finding lane lines in the current frame I save them  for a possible reuse in the next frame. When finding lane lines in a new video frame, before starting the sliding window process (step 4 above) I look at the white pixels that are within margin of 50 pixels from the lane line of the previous frame. Then I fit a second degree polynomial using these pixels. I repeat this step for both left and right lines. If the new lines are convex or concave then I take these lines and skip the sliding window process. Otherwise, I find lane lines from scratch using sliding window process.
 
 2. **Smoothing of lane lines**. The final line in the current frame is the weighted average of the lines found in the current and previous frames.
 After several experiments I found that 0.5 weight of current and previous frames gives the most accurate line detection.
+
+Here is a [link to my video result](./output_videos/project_video.mp4).
 
 ---
 
