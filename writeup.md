@@ -116,7 +116,7 @@ Additional examples of such images are located in the folder output_images/fit_l
 
 The computation of the radius of curvature is performed in function `radius_of_curvature()` in cell 12 and consists of the three steps:
 
-1. Convert the pixels assigned to lane line from image space to real world space. I assumed that 30 meters along y axis correspond to 720 pixels and 3.7 meters along x axis correspond to 700 pixels. Using this assumption, to transform coordinates from image to pixel space we multiply x and y values of pixels by 3.7/700 and 30/720 respectfully.
+1. Convert the pixels assigned to lane line from image space to real world space. The width of lane is 3.7 meters. After perspective transform the width of lane is approximately 650 pixels. Hence to transform x coordinates from image to real world space I multiplied them by 3.7/650. The visible area has approximately 17 dashed intervals. Each such interval is 3 meter. After perspective transform this visible area occupies 720 pixels. I assumed that 50 meters along y axis correspond to 720 pixels and 3.7 meters along x axis correspond to 650 pixels. Hence to transform y coordinates from image to real world space I multiplied y values of pixels by 51/720.
 
 2. Fit a second degree polynomial over the line pixels using their real world coordinates. I used `np.polyfit()` function. Similarly to fitting polynomials in the image space, the fit in the real world space is done with x coordinates being a function of y coordinates. The resulting polynomial can be represented as
 
@@ -161,8 +161,10 @@ Here is a [link to my video result](./output_videos/project_video.mp4).
 ### Discussion
 In this project I showed how to detect lane lines, identify lane area, compute radius of curvature and position of a car within a lane. There are several points for future improvements and enhancements:  
 1. Make the pipeline work well on two other videos (`challenge_video.mp4` and `harder_challenge_video.mp4`).
-2. The test video and images have a car diving in the leftmost or rightmost lane. The pipeline should also be tested when the car drives in a central lane.
-3. The pipeline can be enhanced to handle roads with only a single lane line.
-4. Handling of splitting and merging lanes.
-5. Handling of roads that have pedestrian crossing markings.
-6. Lane line detection pipeline can be merged into behavior cloning model from the previous project. The output of lane lines pipeline can be an additional input to a neural network that predicts steering angle.  
+2. The test video and images have a car driving in the leftmost or rightmost lane. The pipeline should also be tested when the car drives in a central lane.
+3. The test video and images  have a car driving in flat road. The pipeline should also be tested when the car drives in the road with significant slopes. 
+4. The pipeline can be enhanced to handle roads with only a single lane line.
+6. Handling of splitting and merging lanes.
+7. Handling of roads that have pedestrian crossing markings.
+8. Handling of driving at night.
+9. Lane line detection pipeline can be merged into behavior cloning model from the previous project. The output of lane lines pipeline can be an additional input to a neural network that predicts steering angle.  
