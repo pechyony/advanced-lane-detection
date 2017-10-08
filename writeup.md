@@ -51,7 +51,7 @@ using the `cv2.undistort()` function and obtained this result:
 
 ![alt text][image1]
 
-The distortion correction transform stretches the image. For example,  the rear left light of the white car disappears after this transformation.  
+The distortion correction transform stretches the image. For example,  the rear left light of the white car disappears after this transformation. Additional examples of undistorted images are located in output_images/undistorted_images folder. 
 
 ### Pipeline (single images)
 
@@ -65,6 +65,8 @@ To demonstrate this step, I describe how I apply line detection pipeline to one 
 I used a combination of color and gradient thresholds to generate a binary image (`create_binary_image()` functions in cell 5, this code is called from cell 6 of `Advanced Lane Lines.ipynb`). I transformed an image into HLS space and computed Sobel operator along x axis in L channel. The output of Sobel operator war normalized to be in the range of [0,255]. In the thesholded binary image a pixel has white color if its Sobel operator is in the range [20,100] or both its S channel value is in [100,255] range and its L channel value is in [50,255] range. Here is an example of my output for this step:
 
 ![alt text][image2]
+
+Additional examples of thresholded binary images are located in output_images/binary_images folder.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
@@ -85,6 +87,8 @@ I used the function `cv2.getPerspectiveTransform()` to create a perspective tran
 
 ![alt text][image4]
 
+Additional examples of images with perspective polygon before and after perspective transform are located in output_images/binary_images_lines and output_images/perspective_transform_lines folders respectfully.
+
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 I identified left and right lane lines in the gray scale image using a sliding window technique:
@@ -102,6 +106,8 @@ The code for steps 2 and 3 is in the function `track_lane()` in cell 11. The fun
 The following image shows the rectangles as they move through search windows, pixels assigned to each line and corresponding polynomials. Red pixels are assigned to the left line and red pixels are assigned to the right line.
 
 ![alt text][image5]
+
+Additional examples of such images are located in the folder output_images/fit_lane folder. 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -130,6 +136,8 @@ The computation of the position of the vehicle with respect to the center is don
 I implemented this step in the function `visualize_lanes()` in cell 12. I used the lane lines to create a polygon that represents the lane area. This polygon is drawn over the black image and is filled with the green color using the function `cv2.fillPoly()`. The resulting visualization of the drivable area is in the image space after perspective transform. In the next step I converted this polygon to the original image space using inverse perspective transform. The transformation matrix of this transform was obtained previously along with the matrix of perspective transform. Finally, I merged the original undistorted image with the image of the polygon in the original image space. Here is an example of my result on a test image:
 
 ![alt text][image6]
+
+Additional examples of such images are located in the folder output_images/final_images.
 
 ---
 
